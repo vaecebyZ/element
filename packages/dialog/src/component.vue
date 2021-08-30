@@ -163,11 +163,7 @@
       back() {
         if (this.visible) {
           history.pushState(null, null, document.URL);
-          if (this.$msg !== undefined) {
-            this.$msg.info('请使用关闭按钮关闭弹窗！');
-          } else {
-            alert('请使用关闭按钮关闭弹窗！');
-          }
+          this.hide();
         } else {
           window.history.back(-1);
         }
