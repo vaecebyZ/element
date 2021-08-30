@@ -123,6 +123,10 @@
           this.closed = false;
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
+          if (window.history && window.history.pushState) {
+            history.pushState(null, null, document.URL);
+            window.addEventListener('popstate', this.back, false);
+          }
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
           });
@@ -131,6 +135,7 @@
           }
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
+          window.removeEventListener('popstate', this.back, false);
           if (!this.closed) this.$emit('close');
           if (this.destroyOnClose) {
             this.$nextTick(() => {
@@ -155,6 +160,18 @@
     },
 
     methods: {
+      back() {
+        if (this.visible) {
+          history.pushState(null, null, document.URL);
+          if (this.$msg !== undefined) {
+            this.$msg.info('请使用关闭按钮关闭弹窗！');
+          } else {
+            alert('请使用关闭按钮关闭弹窗！');
+          }
+        } else {
+          window.history.back(-1);
+        }
+      },
       getMigratingConfig() {
         return {
           props: {
@@ -203,6 +220,7 @@
     },
 
     destroyed() {
+      window.removeEventListener('popstate', this.back, false);
       // if appendToBody is true, remove DOM node after destroy
       if (this.appendToBody && this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
