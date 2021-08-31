@@ -161,12 +161,7 @@
 
     methods: {
       back() {
-        if (this.visible) {
-          history.pushState(null, null, document.URL);
-          this.hide();
-        } else {
-          window.history.back(-1);
-        }
+        this.hide();
       },
       getMigratingConfig() {
         return {
