@@ -61,7 +61,7 @@
     &:focus,
     &:active {
       color: $--color-white;
-      background-color: mix($background-color, $--color-white);
+      background-color: $background-color;
       border-color: mix($border-color, $--color-white);
     }
   }
