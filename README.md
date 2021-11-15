@@ -54,3 +54,10 @@ npm run build:umd
 npm run build:theme
 ```
 
+QA:
+
+```bash
+## 报错 x:\xxxx\xxxxx\element\node_modules\node-sass: Command failed. gyp verb `which` failed  python2 Error: not found: python2
+## 没有安装python2依赖 [管理员权限] 安装python 2.7.x之后设置好环境变量即可
+```
+
